@@ -1,11 +1,13 @@
 let rock = document.getElementById("rock-btn");
 let paper = document.getElementById("paper-btn");
 let scissors = document.getElementById("scissors-btn");
+let totallives = 3;
 
 let options = [rock, paper, scissors]
 
 let result = document.getElementById("result");
 let playagain = document.getElementById("play-again");
+let lives = document.getElementById("lives");
 
 let playerchoice = document.getElementById("player-choice");
 let computerchoice = document.getElementById("computer-choice");
@@ -29,18 +31,25 @@ function playRound(playerSelection, computerSelection) {
     } else if (playerSelection == "rock" && computerSelection == "paper") {
         result.innerHTML = "You lose! Paper beats rock.";
         result.classList.add("lose");
+        totallives = totallives - 1;
+        lives.innerHTML = `${totallives} lives remaining`
+
     } else if (playerSelection == "paper" && computerSelection == "rock") {
         result.innerHTML = "You win! Paper beats rock.";
         result.classList.add("win");
     } else if (playerSelection == "paper" && computerSelection == "scissors") {
         result.innerHTML = "You lose! Scissors beats paper.";
         result.classList.add("lose");
+        totallives = totallives - 1;
+        lives.innerHTML = `${totallives} lives remaining`
     } else if (playerSelection == "scissors" && computerSelection == "paper") {
         result.innerHTML = "You win! Scissors beats paper.";
         result.classList.add("win");
     } else if (playerSelection == "scissors" && computerSelection == "rock") {
         result.innerHTML = "You lose! Rock beats scissors.";
         result.classList.add("lose");
+        totallives = totallives - 1;
+        lives.innerHTML = `${totallives} lives remaining`
     }
 
     options.forEach(option => {
