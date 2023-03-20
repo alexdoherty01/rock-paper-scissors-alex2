@@ -57,6 +57,11 @@ function playRound(playerSelection, computerSelection) {
         option.classList.add("disabled");
     });
 
+    if (totallives == 0) {
+        lives.innerHTML = "You Lose"
+        return;
+    }
+
     playagain.classList.remove("hidden");
 }
 
