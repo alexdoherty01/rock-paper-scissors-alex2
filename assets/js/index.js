@@ -1,10 +1,12 @@
 let rock = document.getElementById("rock-btn");
 let paper = document.getElementById("paper-btn");
 let scissors = document.getElementById("scissors-btn");
+let lizard = document.getElementById("lizard-btn");
+let spock = document.getElementById("spock-btn");
 let totallives = 3;
 let totalwins = 0;
 
-let options = [rock, paper, scissors]
+let options = [rock, paper, scissors, lizard, spock]
 
 let result = document.getElementById("result");
 let playagain = document.getElementById("play-again");
@@ -15,7 +17,7 @@ let playerchoice = document.getElementById("player-choice");
 let computerchoice = document.getElementById("computer-choice");
 
 function computerPlay() {
-    let choices = ["rock", "paper", "scissors"];
+    let choices = ["rock", "paper", "scissors", "lizard", "spock"];
     let randomChoice = Math.floor(Math.random() * choices.length);
     return choices[randomChoice];
 }
@@ -24,46 +26,35 @@ function playRound(playerSelection, computerSelection) {
     playerchoice.src = "assets/img/" + playerSelection + ".png";
     computerchoice.src = "assets/img/" + computerSelection + ".png";
 
-    if (playerSelection == computerSelection) {
-        result.innerHTML = "It's a tie!";
-        result.classList.add("tie");
+  
 
-    } else if (playerSelection == "rock" && computerSelection == "scissors") {
-        result.innerHTML = "You win! Rock beats scissors.";
+
+    if ((playerSelection === "rock" && computerSelection === "paper") ||
+        (playerSelection === "paper" && computerSelection === "scissors") ||
+        (playerSelection === "scissors" && computerSelection === "rock") ||
+        (playerSelection === "lizard" && computerSelection === "scissors") ||
+        (playerSelection === "spock" && computerSelection === "rock")) {
+        console.log("You win!");
+        result.innerHTML = `${playerSelection} beats ${computerSelection}`;
         result.classList.add("win");
         totalwins = totalwins + 1;
         tally.innerHTML = `${totalwins} games won`
-
-    } else if (playerSelection == "rock" && computerSelection == "paper") {
-        result.innerHTML = "You lose! Paper beats rock.";
-        result.classList.add("lose");
-        totallives = totallives - 1;
-        lives.innerHTML = `${totallives} lives remaining`
-
-    } else if (playerSelection == "paper" && computerSelection == "rock") {
-        result.innerHTML = "You win! Paper beats rock.";
-        result.classList.add("win");
-        totalwins = totalwins + 1;
-        tally.innerHTML = `${totalwins} games won`
-
-    } else if (playerSelection == "paper" && computerSelection == "scissors") {
-        result.innerHTML = "You lose! Scissors beats paper.";
-        result.classList.add("lose");
-        totallives = totallives - 1;
-        lives.innerHTML = `${totallives} lives remaining`
-
-    } else if (playerSelection == "scissors" && computerSelection == "paper") {
-        result.innerHTML = "You win! Scissors beats paper.";
-        result.classList.add("win");
-        totalwins = totalwins + 1;
-        tally.innerHTML = `${totalwins} games won`
+       
+    } else if ((playerSelection === "rock" && computerSelection === "paper") ||
+        (playerSelection === "paper" && computerSelection === "scissors") ||
+        (playerSelection === "scissors" && computerSelection === "rock") ||
+        (playerSelection === "lizard" && computerSelection === "scissors") ||
+        (playerSelection === "spock" && computerSelection === "rock")) {
         
-    } else if (playerSelection == "scissors" && computerSelection == "rock") {
-        result.innerHTML = "You lose! Rock beats scissors.";
+        console.log("Computer wins!");
+        result.innerHTML = `${computerSelection} beats ${playerSelection}`;
         result.classList.add("lose");
         totallives = totallives - 1;
         lives.innerHTML = `${totallives} lives remaining`
+    } else {
+      console.log("It's a tie!");
     }
+
 
     options.forEach(option => {
         option.disabled = true;
@@ -105,20 +96,19 @@ playagain.addEventListener("click", function() {
     });
 });
 
-/* These are all copied from web3. Adjust them to fit the opn/close "hints" modal button on the screen */
 
-let modal = document.getElementById("hints-modal");
+
+let modal = document.getElementById("modal-container");
 let btn = document.getElementById("open");
-
+let btnclose = document.getElementById("close");
 
 btn.addEventListener ("click",function() {
   modal.style.display = "block";
 } )
 
-
-
-window.onclick = function(event) {
-  if (event.target == modal) {
+btnclose.addEventListener ("click",function() {
     modal.style.display = "none";
-  }
-}
+  } )
+
+
+
