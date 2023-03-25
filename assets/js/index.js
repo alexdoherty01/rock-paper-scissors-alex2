@@ -10,6 +10,9 @@ let options = [rock, paper, scissors, lizard, spock]
 
 let result = document.getElementById("result");
 let playagain = document.getElementById("play-again");
+let easybtn = document.getElementById("easy")
+let mediumbtn = document.getElementById("medium")
+let hardbtn = document.getElementById("hard")
 let lives = document.getElementById("lives");
 let tally = document.getElementById("tally");
 
@@ -40,19 +43,23 @@ function playRound(playerSelection, computerSelection) {
         totalwins = totalwins + 1;
         tally.innerHTML = `${totalwins} games won`
        
-    } else if ((playerSelection === "rock" && computerSelection === "paper") ||
-        (playerSelection === "paper" && computerSelection === "scissors") ||
-        (playerSelection === "scissors" && computerSelection === "rock") ||
-        (playerSelection === "lizard" && computerSelection === "scissors") ||
-        (playerSelection === "spock" && computerSelection === "rock")) {
-        
-        console.log("Computer wins!");
+        } else if ((computerSelection === "rock" && playerSelection === "paper") ||
+        (computerSelection === "paper" && playerSelection === "scissors") ||
+        (computerSelection === "scissors" && playerSelection === "rock") ||
+        (computerSelection === "lizard" && playerSelection === "scissors") ||
+        (computerSelection === "spock" && playerSelection === "rock")) {
+    
+            console.log("Computer wins!");
         result.innerHTML = `${computerSelection} beats ${playerSelection}`;
         result.classList.add("lose");
         totallives = totallives - 1;
         lives.innerHTML = `${totallives} lives remaining`
     } else {
-      console.log("It's a tie!");
+      console.log("It's a tie!")
+       result.innerHTML = "It's a tie";
+       result.classList.add("tie");
+      
+
     }
 
 
@@ -63,6 +70,11 @@ function playRound(playerSelection, computerSelection) {
 
     if (totallives == 0) {
         lives.innerHTML = "You Lose"
+        return;
+    }
+
+    if (totalwins == 5) {
+        tally.inerHTML ="You Won"
         return;
     }
 
@@ -81,6 +93,14 @@ scissors.addEventListener("click", function() {
     playRound("scissors", computerPlay());
 });
 
+lizard.addEventListener("click", function() {
+    playRound("lizard", computerPlay());
+});
+
+spock.addEventListener("click", function() {
+    playRound("spock", computerPlay());
+});
+
 playagain.addEventListener("click", function() {
     playerchoice.src = "assets/img/questionmark.png";
     computerchoice.src = "assets/img/questionmark.png";
@@ -96,19 +116,32 @@ playagain.addEventListener("click", function() {
     });
 });
 
+easybtn.addEventListener("click", function() {
+    spock.classList.remove("hidden");
+    lizard.classList.remove("hidden");
+})
+mediumbtn.addEventListener("click", function() {
+    spock.classList.add("hidden");
+    lizard.classList.remove("hidden");
+})
+hardbtn.addEventListener("click", function() {
+    spock.classList.add("hidden");
+    lizard.classList.add("hidden");
+})
 
 
-let modal = document.getElementById("modal-container");
-let btn = document.getElementById("open");
-let btnclose = document.getElementById("close");
+let modal = document.getElementById("hints-modal");
 
-btn.addEventListener ("click",function() {
+let openbtn = document.getElementById("open-hints");
+
+let closebtn = document.getElementById("close-hints");
+
+
+openbtn.addEventListener ("click",  function() {
   modal.style.display = "block";
 } )
 
-btnclose.addEventListener ("click",function() {
-    modal.style.display = "none";
+
+closebtn.addEventListener ("click",  function() {
+    modal.style.display = "hidden";
   } )
-
-
-
