@@ -91,3 +91,21 @@ playagain.addEventListener("click", function() {
         option.classList.remove("disabled");
     });
 });
+
+/* These are all copied from web3. Adjust them to fit the opn/close "hints" modal button on the screen */
+
+let modal = document.getElementById("hints-modal");
+let btn = document.getElementById("open");
+
+
+btn.addEventListener ("click",function() {
+  modal.style.display = "block";
+} )
+
+
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
