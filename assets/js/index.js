@@ -129,7 +129,7 @@ hardbtn.addEventListener("click", function() {
     lizard.classList.add("hidden");
 })
 
-
+document.addEventListener('DOMContentLoaded', function() {
 let modal = document.getElementById("hints-modal");
 
 let openbtn = document.getElementById("open-hints");
@@ -139,9 +139,12 @@ let closebtn = document.getElementById("close-hints");
 
 openbtn.addEventListener ("click",  function() {
   modal.style.display = "block";
-} )
+} );
 
 
 closebtn.addEventListener ("click",  function() {
-    modal.style.display = "hidden";
-  } )
+    modal.style.display = "none";
+  } );
+
+});
+
