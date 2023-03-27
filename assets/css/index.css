@@ -5,6 +5,10 @@ html {
     background-color: #fff;
 }
 
+title {
+    font-family: fantasy;
+}
+
 /* remove if needed */
 
 #open-hints {
